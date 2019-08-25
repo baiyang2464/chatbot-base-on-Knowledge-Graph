@@ -1,0 +1,2 @@
+model_checkpoint_path: "bilstm-crf.models-2254"
+all_model_checkpoint_paths: "bilstm-crf.models-2254"
