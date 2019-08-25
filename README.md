@@ -29,7 +29,7 @@ It is indeed a luxury to keep human reason forever. by  Moss, a robot of the fil
     + [嵌入层](#嵌入层)
     + [卷积层](#卷积层)
     + [池化层](#池化层)
-    + [全连接及Softmax层](#全连接及Softmax层)
+    + [全连接及SoftMax层](#全连接及SoftMax分类层)
     + [网络结构与超参数](#网络结构与超参数)
 
 + [参考](#参考)
