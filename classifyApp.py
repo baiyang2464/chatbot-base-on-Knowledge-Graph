@@ -20,7 +20,7 @@ class classifyApplication:
             with sess.graph.as_default():
                 self.word_embedings_path="./data_ai/cbowData/classifyDocument.txt.ebd.npy"
                 self.vocb_path = "./data_ai/cbowData/classifyDocument.txt.vab"
-                self.model_path="./classify/classifyModel"
+                self.model_path="./data_ai/classifyModel"
                 self.num_classes = 9
                 self.max_sentence_len = 20
                 self.embedding_dim = 200

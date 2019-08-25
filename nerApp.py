@@ -28,7 +28,7 @@ class nerAppication:
                 self.tag_nums =13  # 标签数目
                 self.hidden_nums = 650  # bi-lstm的隐藏层单元数目
                 self.sentence_len = self.dataGen.sentence_length # 句子长度,输入到网络的序列长度
-                self.model_checkpoint_path ="./ner/nerModel/"
+                self.model_checkpoint_path ="./data_ai/nerModel/"
                 self.model = BiLSTM_CRF(
                                         batch_size = batch_size,
                                         tag_nums=self.tag_nums,
