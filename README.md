@@ -356,7 +356,11 @@ CRF的`转移矩阵A`由神经网络的CRF学习得到，而`发射概率P矩阵
 </p>
 ##### 反向传播更新参数
 
+
+
 损失函数用的对数损失，反向传播更新参数，进行下一批数据前向传播训练
+
+
 
 ##### 网络结构与超参数
 
@@ -418,6 +422,8 @@ f）语料标注使用的BIOES标注（之前用的BIO标注）
 </p>
 ##### 卷积层
 
+
+
 1. 一个长度为n的句子被视为N个word的拼接(concatenation)，每个word 的embedding有k维，则concat后的句子表示为一个N x k的矩阵，即神经网络的输入
 2. 由于图像是二维（长和宽）三通道(RGB)，而句子是一维的（word按顺序拼接）（可以L通道，即使用L种不同的embedding方法，就可以形成L层输入为N x k的矩阵），因此这里的CNN的filter（卷积核）的大小都为h x k（h为卷积核所围窗口中单词的个数） ，即每个filter扫过的区域是从上往下覆盖到h个word的所有embedding长度
 3. 更具n-gram模型，可选取几个不同大小(h不同的)filter去学习句子的不同的局部特征。
@@ -470,6 +476,8 @@ Pooling的用处是：
 
 
 ### 参考
+
+
 
 [基于医疗知识图谱的问答系统](<https://github.com/liuhuanyong/QASystemOnMedicalKG>)
 
