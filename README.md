@@ -360,9 +360,9 @@ state: The final state. If cell.state_size is an int, this will be shaped [batch
 
 ##### CRF层
 
-CRF的`转移矩阵A`由神经网络的CRF学习得到，而`发射概率P矩阵` 就是由Bi-LSTM的输出来作近似模拟。
+CRF的`转移矩阵A`由神经网络的CRF学习得到，而`发射概率矩阵P` 就是由Bi-LSTM的输出来作近似模拟。
 
-
+这样有了（A,P,$\pi$）就可以调用viterbi算法进行解码做预测了
 
 <p align="center">
 	<img src=./pictures/082504.png alt="Sample"  width="800">
