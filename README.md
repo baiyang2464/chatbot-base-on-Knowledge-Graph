@@ -35,7 +35,7 @@ It is indeed a luxury to keep human reason forever. by  Moss, a robot of the fil
     + [全连接及SoftMax层](#全连接及SoftMax分类层)
     + [网络结构与超参数](#网络结构与超参数)
 
-+ [参考](#参考)
++ [参考资料](#参考资料)
 
 
 
@@ -362,8 +362,6 @@ CRF的`转移矩阵A`由神经网络的CRF学习得到，而`发射概率P矩阵
 </p>
 ##### 反向传播更新参数
 
-
-
 损失函数用的对数损失，反向传播更新参数，进行下一批数据前向传播训练
 
 
@@ -481,7 +479,7 @@ Pooling的用处是：
 </p
 
 
-### 参考
+### 参考资料
 
 [基于医疗知识图谱的问答系统](<https://github.com/liuhuanyong/QASystemOnMedicalKG>)
 
