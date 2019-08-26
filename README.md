@@ -3,11 +3,12 @@ It is indeed a luxury to keep human reason forever. by  Moss, a robot of the fil
 “让人类永远保持理智，确实是一种奢求” ，机器人莫斯，《流浪地球》
 
 <p align="center">
-	<img src=./pictures/moss.jpg alt="Sample"  width="600">
+	<img src=./pictures/show_talk.gif alt="Sample"  width="700">
 	<p align="center">
 		<em> </em>
 	</p>
 </p>
+
 
 
 + [0.项目概况](#项目概况)
@@ -44,7 +45,12 @@ It is indeed a luxury to keep human reason forever. by  Moss, a robot of the fil
 
 + 运行效果：
 
-
+<p align="center">
+	<img src=./pictures/082601.png alt="Sample"  width="700">
+	<p align="center">
+		<em> </em>
+	</p>
+</p>
 
 + 项目的搭建大致分为四个模块：
   + 基础数据爬取
@@ -476,8 +482,6 @@ Pooling的用处是：
 
 
 ### 参考
-
-
 
 [基于医疗知识图谱的问答系统](<https://github.com/liuhuanyong/QASystemOnMedicalKG>)
 

@@ -60,11 +60,9 @@ class question_ays:
                     _entity=''
                 else:
                     _entity=''
-            #print("middle_question:%s"%(middle_question))
-            question_text = ' '.join(middle_question)
+            question_text = ''.join(middle_question)
             _classify_idx = self.classifyApp.questionClassify(self.sess_classify ,question_text)
             _classify_label = self.id2label[_classify_idx[0]]
-            #print("the label is:%s"%(_classify_label))
             question_types.append(_classify_label)
         res['args'] = args
         res['question_types']=question_types
