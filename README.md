@@ -52,17 +52,24 @@ It is indeed a luxury to keep human reason forever. by  Moss, a robot of the fil
 	</p>
 </p>
 
-+ 项目的搭建大致分为四个模块：
++ 项目的搭建大致分为三个模块：
   + 基础数据爬取
   + 知识图谱构建
-  + 问句分析
-  + 回答生成
-
+  + 自动问答实现
+  
 + 项目运行环境：
 
-python   :  python 3.6.8
+python   : 
 
-运行系统：ubuntu 16.04 
+```
+ python 3.6.8
+```
+
+运行系统：
+
+```
+ubuntu 16.04 
+```
 
 知识图谱：
 
@@ -93,8 +100,6 @@ ahocorasick    （安装方法 pip install pyahocorasick）
   在应用阶段由于要部署要服务器上使用的对应的tensorflow的cpu版本
 2.若要clone项目，尽量保持扩展包的版本一致
 ```
-
-
 
 + 项目运行方式
 
@@ -311,23 +316,27 @@ chatbot
 具体是怎么拼接的：做ner时，前向时候得到的LSTM的的中间状态输出向量和后向时中间状态输出向量中对应的单词的中间状态拼接，如下图：
 
 <p align="center">
-	<img src=./pictures/082502.png alt="Sample"  width="700">
+	<img src=./pictures/082502.png alt="Sample"  width="550">
 	<p align="center">
 		<em> lstm中间状态向量拼接作为输出用于ner </em>
 	</p>
 </p>
 
+
 若用于句子的情感分类则作以下拼接：
 
 <p align="center">
-	<img src=./pictures/082503.png alt="Sample"  width="700">
+	<img src=./pictures/082503.png alt="Sample"  width="550">
 	<p align="center">
 		<em> lstm中间状态向量拼接作为输出用于情感分类 </em>
 	</p>
 </p>
+
+图片来至[详解BiLSTM及代码实现](<https://segmentfault.com/p/1210000016830547/read#top>)
+
 tensorflow中tf.nn.dynamic_rnn函数
 
-```
+```python
 outputs, state = tf.nn.dynamic_rnn(
     cell,
     inputs,
@@ -339,6 +348,7 @@ outputs, state = tf.nn.dynamic_rnn(
     time_major=False,
     scope=None
 )
+其中两个返回值：
 outputs: The RNN output Tensor. this will be a Tensor shaped: [batch_size, max_time, cell.output_size].
 
 state: The final state. If cell.state_size is an int, this will be shaped [batch_size, cell.state_size]. 
@@ -350,16 +360,17 @@ state: The final state. If cell.state_size is an int, this will be shaped [batch
 
 ##### CRF层
 
-CRF的`转移矩阵A`由神经网络的CRF学习得到，而`发射概率P矩阵` 就是由Bi-LSTM的输出来作近似模拟。	
+CRF的`转移矩阵A`由神经网络的CRF学习得到，而`发射概率P矩阵` 就是由Bi-LSTM的输出来作近似模拟。
 
 
 
 <p align="center">
-	<img src=./pictures/082504.png alt="Sample"  width="900">
+	<img src=./pictures/082504.png alt="Sample"  width="800">
 	<p align="center">
 		<em> Bi-LSMT+CRF </em>
 	</p>
 </p>
+
 ##### 反向传播更新参数
 
 损失函数用的对数损失，反向传播更新参数，进行下一批数据前向传播训练
@@ -430,19 +441,17 @@ f）语料标注使用的BIOES标注（之前用的BIO标注）
 
 1. 一个长度为n的句子被视为N个word的拼接(concatenation)，每个word 的embedding有k维，则concat后的句子表示为一个N x k的矩阵，即神经网络的输入
 2. 由于图像是二维（长和宽）三通道(RGB)，而句子是一维的（word按顺序拼接）（可以L通道，即使用L种不同的embedding方法，就可以形成L层输入为N x k的矩阵），因此这里的CNN的filter（卷积核）的大小都为h x k（h为卷积核所围窗口中单词的个数） ，即每个filter扫过的区域是从上往下覆盖到h个word的所有embedding长度
-3. 更具n-gram模型，可选取几个不同大小(h不同的)filter去学习句子的不同的局部特征。
+3. 根据n-gram模型，可选取几个不同大小(h不同的)filter去学习句子的不同的局部特征，得到不同的feature map。
 
-每个filter（这里表示为w）所学习到的特征即如下表示:
 
-![img](https:////upload-images.jianshu.io/upload_images/8697462-cb8f1ae2c5469c6a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/294/format/webp)
 
 ##### 池化层
 
 在得到每个卷积核的feature map之后，要做一个max-pooling，即max(c)
 
-Pooling的用处是：
- 1.使得可以输入不同长度的句子长度不同的sentence经过这个卷积核后得到的特征都为1维
- 2.抓住不变性，比如一个卷积核是用来检测是否存在not like这样的负面评论，则不论出现该模式出现在句子的哪里，前面还是后面，这个卷积核都能取得很高的卷积值。
+max-pooling的用处是：
+ 1.使得可以输入不同长度的句子。长度不同的sentence经过这个卷积核后得到的特征都为1维
+ 2.能够有效抓取句子的最突出特征。比如一个卷积核是用来检测是否存在not like这样的负面评论，则不论出现该模式出现在句子的哪里，前面还是后面，这个卷积核都能取得很高的卷积值。
 
 当然Pooling会损失句子的order信息，比如最显著的模式出现的位置（句子的前面还是后面），因此又多种基于Pooling的优化：如k-max pooling（保留feature map中K个最大的值）或者dynamic k-max pooling （sentence分为几段，每一段取一个最大值）
 
@@ -483,11 +492,15 @@ Pooling的用处是：
 
 [基于医疗知识图谱的问答系统](<https://github.com/liuhuanyong/QASystemOnMedicalKG>)
 
+[Bidirectional LSTM-CRF Models for Sequence Tagging](<https://arxiv.org/pdf/1508.01991v1.pdf>)
+
 [BiLSTM+CRF 命名实体识别 实践与总结](<https://blog.csdn.net/jmh1996/article/details/84934260>)
+
+[Convolutional Neural Networks for Sentence Classification](<https://arxiv.org/pdf/1408.5882.pdf>)
 
 [基于tensorflow 实现的用textcnn方法做情感分析的项目](<https://github.com/norybaby/sentiment_analysis_textcnn>)
 
 [Understanding Convolutional Neural Networks for NLP](<http://www.wildml.com/2015/11/understanding-convolutional-neural-networks-for-nlp/>)
 
-[硕士论文-基于知识图谱的自动问答系统的应用研究与实现_张崇宇]()
+[基于知识图谱的自动问答系统的应用研究与实现](<https://kns.cnki.net/KCMS/detail/detail.aspx?dbcode=CMFD&dbname=CMFDTEMP&filename=1019114076.nh&uid=WEEvREcwSlJHSldRa1FhdXNXaEdzT1M4d3dOc2hnWkorTTlyOWYvbGdTTT0=$9A4hF_YAuvQ5obgVAqNKPCYcEjKensW4IQMovwHtwkF4VYPoHbKxJw!!&v=MzA4MzR6Z1VMdkxWRjI2RjdLNUd0SExxWkViUElSOGVYMUx1eFlTN0RoMVQzcVRyV00xRnJDVVJMT2ZiK1JwRnk=>)
 
