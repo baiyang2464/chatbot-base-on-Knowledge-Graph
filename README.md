@@ -495,17 +495,9 @@ max-pooling的用处是：
 
 ### 参考资料
 
-[基于医疗知识图谱的问答系统](<https://github.com/liuhuanyong/QASystemOnMedicalKG>)
-
 [Bidirectional LSTM-CRF Models for Sequence Tagging](<https://arxiv.org/pdf/1508.01991v1.pdf>)
-
-[BiLSTM+CRF 命名实体识别 实践与总结](<https://blog.csdn.net/jmh1996/article/details/84934260>)
 
 [Convolutional Neural Networks for Sentence Classification](<https://arxiv.org/pdf/1408.5882.pdf>)
 
-[基于tensorflow 实现的用textcnn方法做情感分析的项目](<https://github.com/norybaby/sentiment_analysis_textcnn>)
-
 [Understanding Convolutional Neural Networks for NLP](<http://www.wildml.com/2015/11/understanding-convolutional-neural-networks-for-nlp/>)
-
-[基于知识图谱的自动问答系统的应用研究与实现](<https://kns.cnki.net/KCMS/detail/detail.aspx?dbcode=CMFD&dbname=CMFDTEMP&filename=1019114076.nh&uid=WEEvREcwSlJHSldRa1FhdXNXaEdzT1M4d3dOc2hnWkorTTlyOWYvbGdTTT0=$9A4hF_YAuvQ5obgVAqNKPCYcEjKensW4IQMovwHtwkF4VYPoHbKxJw!!&v=MzA4MzR6Z1VMdkxWRjI2RjdLNUd0SExxWkViUElSOGVYMUx1eFlTN0RoMVQzcVRyV00xRnJDVVJMT2ZiK1JwRnk=>)
 
