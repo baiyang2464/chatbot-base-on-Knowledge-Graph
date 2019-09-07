@@ -493,6 +493,46 @@ max-pooling的用处是：
 </p
 
 
+#### 回答生成
+
+知识图谱三元组<实体，关系，实体>或者是<实体，属性，属性值>
+
+前面抽取的“医疗命名实体”就三元组的第一个元素——实体
+
+前面进行的“用户意图识别”则是三元组中的第二个元素——关系/属性
+
+得到三元组的这两个元素就可以用cypher语言在neo4j图数据库中进行查找对应的实体或属性值，然后构建回答返回给用户
+
+```
+    def sql_transfer(self, question_type, entities):
+        if not entities:
+            return []
+
+        # 查询语句
+        sql = []
+        # 查询疾病的原因
+        if question_type == 'disease_cause':
+            sql = ["MATCH (m:Disease) where m.name = '{0}' return m.name, m.cause".format(i) for i in entities]
+
+        # 查询疾病的防御措施
+        elif question_type == 'disease_prevent':
+            sql = ["MATCH (m:Disease) where m.name = '{0}' return m.name, m.prevent".format(i) for i in entities]
+
+        # 查询疾病的持续时间
+        elif question_type == 'disease_lasttime':
+            sql = ["MATCH (m:Disease) where m.name = '{0}' return m.name, m.cure_lasttime".format(i) for i in entities]
+
+        # 查询疾病的治愈概率
+        elif question_type == 'disease_cureprob':
+            sql = ["MATCH (m:Disease) where m.name = '{0}' return m.name, m.cured_prob".format(i) for i in entities]
+		'''
+		...
+		'''
+        return sql
+```
+
+
+
 ### 参考资料
 
 [Bidirectional LSTM-CRF Models for Sequence Tagging](<https://arxiv.org/pdf/1508.01991v1.pdf>)
